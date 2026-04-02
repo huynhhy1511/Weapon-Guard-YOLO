@@ -1,0 +1,46 @@
+wdss/
+├── frontend/  # Folder chính cho giao diện web
+│   ├── public/  # Files tĩnh (tạo tự động bởi create-react-app)
+│   │   ├── index.html  # Template HTML chính
+│   │   ├── favicon.ico
+│   │   └── manifest.json
+│   ├── src/  # Source code React
+│   │   ├── components/  # Các component reusable (e.g., buttons, cards, modals)
+│   │   │   ├── Dashboard.js  # Dashboard tổng quan
+│   │   │   ├── CameraGrid.js  # Grid xem nhiều camera
+│   │   │   ├── SingleCamera.js  # Xem chi tiết 1 camera
+│   │   │   ├── AlertPopup.js  # Popup cảnh báo realtime
+│   │   │   ├── HistoryTable.js  # Bảng lịch sử sự kiện
+│   │   │   ├── LoginForm.js  # Form đăng nhập
+│   │   │   ├── CameraManager.js  # Quản lý camera (add/edit/delete)
+│   │   │   └── common/  # Sub-folder cho components chung
+│   │   │       ├── Navbar.js  # Thanh navigation
+│   │   │       ├── Sidebar.js  # Sidebar menu
+│   │   │       └── VideoPlayer.js  # Component stream video từ WebSocket
+│   │   ├── pages/  # Các trang chính (routes)
+│   │   │   ├── DashboardPage.js  # Trang dashboard
+│   │   │   ├── MultiViewPage.js  # Trang xem nhiều camera
+│   │   │   ├── SingleViewPage.js  # Trang xem 1 camera
+│   │   │   ├── HistoryPage.js  # Trang lịch sử
+│   │   │   ├── LoginPage.js  # Trang đăng nhập
+│   │   │   └── AdminPage.js  # Trang quản lý (cho admin)
+│   │   ├── assets/  # Tài nguyên (images, sounds, styles)
+│   │   │   ├── images/  # Logo, icons
+│   │   │   │   └── logo.png
+│   │   │   ├── sounds/  # Âm thanh cảnh báo
+│   │   │   │   └── alert.mp3
+│   │   │   └── styles/  # CSS global nếu cần
+│   │   │       └── global.css
+│   │   ├── services/  # Logic kết nối API/WebSocket
+│   │   │   ├── api.js  # Axios instance cho API calls
+│   │   │   └── socket.js  # Socket.io cho WebSocket
+│   │   ├── redux/  # Nếu dùng Redux (state management)
+│   │   │   ├── store.js
+│   │   │   ├── slices/authSlice.js  # State cho auth (JWT)
+│   │   │   └── slices/cameraSlice.js  # State cho cameras/alerts
+│   │   ├── App.js  # Component root, set up routes
+│   │   ├── index.js  # Entry point, render App
+│   │   └── App.test.js  # Test files (optional)
+│   ├── package.json  # Dependencies (e.g., react, mui, socket.io-client)
+│   ├── .env  # Environment variables (e.g., REACT_APP_API_URL=http://localhost:8000)
+│   └── README.md  # Hướng dẫn frontend

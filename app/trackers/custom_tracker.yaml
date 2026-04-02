@@ -1,0 +1,26 @@
+# app/trackers/custom_tracker.yaml
+
+# Chọn thuật toán ByteTrack (Vua của sự bền bỉ)
+tracker_type: bytetrack
+
+# 1. NGƯỠNG NHỚ (QUAN TRỌNG NHẤT)
+# Cũ: 120 (~4s) -> Mới: 600 (~20 giây)
+# Ý nghĩa: Nếu con dao bị che khuất, hệ thống sẽ âm thầm "đợi" nó quay lại trong 20 giây.
+track_buffer: 600
+
+# 2. ĐỘ NHẠY
+# Ngưỡng cao để bắt đầu track (Giảm xuống xíu để dễ bắt đầu hơn)
+track_high_thresh: 0.4
+# Ngưỡng thấp để duy trì track (Giảm kịch sàn để tận dụng cả frame bị mờ/nhòe)
+track_low_thresh: 0.05
+
+# 3. ĐỘ CHÍNH XÁC KHI GHÉP ĐÔI
+# Càng cao càng kỹ tính. Giảm xuống 0.7 để nó "dễ tính" hơn khi dao di chuyển nhanh
+match_thresh: 0.7
+
+# 4. CHỐNG NHẢY ID RÁC
+# Chỉ cấp ID mới cho vật thể cực rõ nét (0.6).
+# Vật thể mờ mờ thì chỉ dùng để duy trì ID cũ chứ không cấp ID mới.
+new_track_thresh: 0.65
+
+fuse_score: True

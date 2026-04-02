@@ -1,0 +1,25 @@
+# --- Web Framework & API ---
+fastapi
+uvicorn[standard]
+python-multipart
+
+# --- Database ---
+sqlalchemy
+psycopg2-binary
+
+# --- Authentication & Security ---
+passlib[bcrypt]
+pyjwt
+
+# --- Computer Vision & AI ---
+opencv-python
+ultralytics
+numpy
+pillow
+onnx
+onnxruntime
+
+# --- Utilities & Notifications ---
+requests
+pydantic
+python-dotenv
