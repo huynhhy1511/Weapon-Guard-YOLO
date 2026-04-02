@@ -1,4 +1,5 @@
 # main.py
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles # Thêm cái này
@@ -13,7 +14,16 @@ import os
 if not os.path.exists("app/static"):
     os.makedirs("app/static")
 
-app = FastAPI(title="WDSS API")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Khởi động Camera threads khi server bật
+    print("🚀 Server starting... Launching camera threads...")
+    start_camera_threads()
+    yield
+    # Dọn dẹp nếu cần thiết khi tắt server
+    print("🛑 Server shutting down...")
+
+app = FastAPI(title="WDSS API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -33,21 +43,10 @@ app.include_router(camera.router, prefix="/cameras", tags=["cameras"])
 app.include_router(detection.router, prefix="/detections", tags=["detections"]) # Bật nếu có file này
 app.include_router(alert.router, prefix="/alerts", tags=["alerts"]) # Bật nếu có file này
 app.include_router(stats.router)
-# @asynccontextmanager
-# async def lifespan(app: FastAPI):
-#     # Code chạy khi bật server
+# @app.on_event("startup")
+# async def startup_event():
 #     print("🚀 Server starting... Launching camera threads...")
 #     start_camera_threads()
-#     yield
-#     # Code chạy khi tắt server (nếu cần dọn dẹp)
-#     print("🛑 Server shutting down...")
-#
-# app = FastAPI(title="WDSS API", lifespan=lifespan)
-
-@app.on_event("startup")
-async def startup_event():
-    print("🚀 Server starting... Launching camera threads...")
-    start_camera_threads()
 
 if __name__ == "__main__":
     uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)
